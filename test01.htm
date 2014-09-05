@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="jquery-1.8.1.js"></script>
+	<script src="jquery.trans.js"></script>
+	<style>
+		body 			{ background: #eee; }
+		#wrapper 		{ width: 320px; height: 442px; overflow: hidden; background: #fff; }
+		#inner-wrapper	{ width: 640px; }
+		
+		#navContainer 	{ width: 320px; height: 0px; overflow: hidden; }
+		#nav 			{ background: #333; color: #fff; }
+
+		#content 		{ width: 320px;}
+		.page			{  }
+
+		.box 			{ width: 64px; height: 64px; background: #0f0; position: absolute; left: 10px; }
+
+	</style>
+</head>
+<body>
+
+	<h1>jQuery transition/transform</h1>
+	<p>
+		A CSS3 transform/translate jQuery library that works smoothly on mobile and desktop alike.
+	</p>
+	<p>
+		Below is a basic but sufficient example of javascript-based translations and transforms.
+		If using fallback browsers, (ie: they do not support CSS3), we try jQuery. Note: jQuery won't do the transforms such as rotate, scale, translate, skew.
+	</p>
+
+	<button id="goButton">Go ahead and see the... thing happen.</button>
+
+	<div class="page" id="navContainer">
+		<div id="nav">
+			<ul>
+				<li>Item 1</li>
+				<li>Item 2</li>
+				<li>Item 3</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="page" id="content">
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+	</div>
+
+	<div id="boxing">
+		<div class="box"></div>
+	</div>
+
+	<script>
+
+		$('#goButton').click(function(){
+			$('#navContainer')
+				.trans({height: "100px", width: "200px", "margin-top": "40px"})
+				.trans({opacity: 0})
+				.trans({opacity: 1})
+				.trans({width: "320px", "margin-top": "0px"});
+
+			$('#content')
+				.trans({scale: 2, opacity: 0})
+				.trans({scale: 1, opacity: 1});
+
+			$('#boxing .box')
+				.trans({rotate: "1080deg", skew: "45deg", left: "200px", duration: "1s"})
+				.trans({left: "100px"})
+				.trans({left: "10px"})
+				.trans({rotate: "0deg", skew: "0deg"})
+
+			//	This is queued nicely!
+			setTimeout(function(){
+				$('#navContainer')
+					.trans({height: "0px"});
+			},200);
+
+		});
+
+	</script>
+
+
+</body>
+</html>
